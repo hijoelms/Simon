@@ -9,6 +9,9 @@ var noOfBlock= block.length;
 var gameOrderList =[];
 console.log(noOfBlock);
 
+
+$(".btn-start").show();
+
 function getRandomInt(max) {
     return Math.floor(Math.random() * max);
   };
@@ -93,6 +96,23 @@ $(document).keydown(function(event){
     }   
 });
 
+$(".btn-start").click( function(){
+    if (turn===userTurn && gameOn ) {
+        if ($("body").hasClass("game-over")) {
+                $("body").removeClass("game-over");
+                //reset the list
+                gameOrderList =[];
+                listIndx = -1;
+            }
+        $(".btn-start").hide();
+        turn = compueterTurn; 
+        playComputer(); 
+        
+          
+    }  
+}
+);
+
 function getBtnColor(indx){
     return block[gameOrderList[indx]];
 }
@@ -103,7 +123,7 @@ function setGameover(){
     $("body").addClass("game-over");
 
     setLevelTitle( "Game Over, Press Any Key to Restart");
-    
+    $(".btn-start").show();
     setTimeout(function(){
 
         $("body").removeClass('game-over');
